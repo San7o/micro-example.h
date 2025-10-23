@@ -61,8 +61,10 @@
 #ifndef MICRO_EXAMPLE
 #define MICRO_EXAMPLE
 
-#define MICRO_EXAMPLE_MAJOR 0
+#define MICRO_EXAMPLE_MAJOR 2
 #define MICRO_EXAMPLE_MINOR 1
+#define MICRO_EXAMPLE_VERSION \
+  ((MICRO_EXAMPLE_MAJOR << 8) | MICRO_EXAMPLE_MINOR)
 
 #ifdef __cplusplus
 extern "C" {
@@ -87,8 +89,8 @@ extern "C" {
 // Errors
 //
 
-#define MICRO_EXAMPLE_OK         0
-#define _MICRO_EXAMPLE_ERROR_MAX 1
+#define MICRO_EXAMPLE_OK          0
+#define _MICRO_EXAMPLE_ERROR_MAX -1
 
 //
 // Types
@@ -104,6 +106,10 @@ typedef struct {
 //
 
 MICRO_EXAMPLE_DEF int micro_example_hello(void);
+
+MICRO_EXAMPLE_DEF int micro_example_major(void);
+MICRO_EXAMPLE_DEF int micro_example_minor(void);
+MICRO_EXAMPLE_DEF int micro_example_version(void);
   
 //
 // Implementation
@@ -116,10 +122,27 @@ MICRO_EXAMPLE_DEF int micro_example_hello(void);
 MICRO_EXAMPLE_DEF int micro_example_hello(void)
 {
   const char* micro_headers_url = "https://github.com/San7o/micro-headers";
-  printf("Hello, from micro-example.h!\n\n");
+  printf("Hello, from micro-example.h! v%d.%d\n\n",
+         micro_example_major(), micro_example_minor());
   printf("Check out the micro-headers: %s\n", micro_headers_url);
   return MICRO_EXAMPLE_OK;
 }
+
+MICRO_EXAMPLE_DEF int micro_example_major(void)
+{
+  return MICRO_EXAMPLE_MAJOR;
+}
+
+MICRO_EXAMPLE_DEF int micro_example_minor(void)
+{
+  return MICRO_EXAMPLE_MINOR;
+}
+
+MICRO_EXAMPLE_DEF int micro_example_version(void)
+{
+  return MICRO_EXAMPLE_VERSION;
+}
+
   
 #endif // MICRO_EXAMPLE_IMPLEMENTATION
 
