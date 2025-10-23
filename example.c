@@ -6,7 +6,7 @@
 #define MICRO_EXAMPLE_IMPLEMENTATION
 #include "micro-example.h"
 
-int main(int argc, char** argv)
+int main(void)
 {
   micro_example_hello();
   return 0;
