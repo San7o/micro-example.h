@@ -92,6 +92,8 @@ extern "C" {
 #define MICRO_EXAMPLE_OK          0
 #define _MICRO_EXAMPLE_ERROR_MAX -1
 
+extern const char* micro_example_error_str[];
+  
 //
 // Types
 //
@@ -107,6 +109,7 @@ typedef struct {
 
 MICRO_EXAMPLE_DEF int micro_example_hello(void);
 
+MICRO_EXAMPLE_DEF const char* micro_example_get_error_str(int error);
 MICRO_EXAMPLE_DEF int micro_example_major(void);
 MICRO_EXAMPLE_DEF int micro_example_minor(void);
 MICRO_EXAMPLE_DEF int micro_example_version(void);
@@ -117,8 +120,15 @@ MICRO_EXAMPLE_DEF int micro_example_version(void);
   
 #ifdef MICRO_EXAMPLE_IMPLEMENTATION
 
-#include <stdio.h>
+const char* micro_example_error_str[] =
+  {
+    [MICRO_EXAMPLE_OK] = "Ok",
+    [-_MICRO_EXAMPLE_ERROR_MAX] = "Invalid error"
+  };
+
   
+#include <stdio.h>
+
 MICRO_EXAMPLE_DEF int micro_example_hello(void)
 {
   const char* micro_headers_url = "https://github.com/San7o/micro-headers";
@@ -128,6 +138,20 @@ MICRO_EXAMPLE_DEF int micro_example_hello(void)
   return MICRO_EXAMPLE_OK;
 }
 
+MICRO_EXAMPLE_DEF const char* micro_example_get_error_str(int error)
+{
+  if (error < _MICRO_EXAMPLE_ERROR_MAX)
+  {
+    error = _MICRO_EXAMPLE_ERROR_MAX;
+  }
+  else if (error > MICRO_EXAMPLE_OK)
+  {
+    error = MICRO_EXAMPLE_OK;
+  }
+
+  return micro_example_error_str[-error];
+}
+  
 MICRO_EXAMPLE_DEF int micro_example_major(void)
 {
   return MICRO_EXAMPLE_MAJOR;
