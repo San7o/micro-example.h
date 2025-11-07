@@ -3,11 +3,8 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+#define MICRO_EXAMPLE_MAIN
 #define MICRO_EXAMPLE_IMPLEMENTATION
 #include "micro-example.h"
 
-int main(void)
-{
-  micro_example_hello();
-  return 0;
-}
+// See the end of micro-example.h

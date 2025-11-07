@@ -185,12 +185,12 @@ MICRO_EXAMPLE_DEF int micro_example_version(void)
 // Examples
 //
   
-#if 0
+#ifdef MICRO_EXAMPLE_MAIN
 
-#define MICRO_EXAMPLE_IMPLEMENTATION
-#include "micro-example.h"
+//#define MICRO_EXAMPLE_IMPLEMENTATION
+//#include "micro-example.h"
 
-int main(int argc, char** argv)
+int main(void)
 {
   micro_example_hello();
   return 0;
