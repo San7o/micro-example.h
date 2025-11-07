@@ -80,7 +80,12 @@ extern "C" {
 #ifndef MICRO_EXAMPLE_DEF
   #define MICRO_EXAMPLE_DEF extern
 #endif
-  
+
+// Config: Do not compile error strings (for a lighter binary)
+// If this is defined, you will not be able to call
+//     micro_example_get_error_str(int error)
+// #define MICRO_ERROR_NO_ERROR_STR
+
 //
 // Macros
 //
