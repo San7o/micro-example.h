@@ -84,7 +84,7 @@ extern "C" {
 // Config: Do not compile error strings (for a lighter binary)
 // If this is defined, you will not be able to call
 //     micro_example_get_error_str(int error)
-// #define MICRO_ERROR_NO_ERROR_STR
+// #define MICRO_EXAMPLE_NO_ERROR_STR
 
 //
 // Macros
@@ -97,8 +97,10 @@ extern "C" {
 #define MICRO_EXAMPLE_OK          0
 #define _MICRO_EXAMPLE_ERROR_MAX -1
 
+#ifndef MICRO_EXAMPLE_NO_ERROR_STR
 extern const char* micro_example_error_str[];
-  
+#endif
+
 //
 // Types
 //
@@ -114,7 +116,10 @@ typedef struct {
 
 MICRO_EXAMPLE_DEF int micro_example_hello(void);
 
+#ifndef MICRO_EXAMPLE_NO_ERROR_STR
 MICRO_EXAMPLE_DEF const char* micro_example_get_error_str(int error);
+#endif
+
 MICRO_EXAMPLE_DEF int micro_example_major(void);
 MICRO_EXAMPLE_DEF int micro_example_minor(void);
 MICRO_EXAMPLE_DEF int micro_example_version(void);
@@ -124,13 +129,6 @@ MICRO_EXAMPLE_DEF int micro_example_version(void);
 //
   
 #ifdef MICRO_EXAMPLE_IMPLEMENTATION
-
-const char* micro_example_error_str[] =
-  {
-    [MICRO_EXAMPLE_OK] = "Ok",
-    [-_MICRO_EXAMPLE_ERROR_MAX] = "Invalid error"
-  };
-
   
 #include <stdio.h>
 
@@ -143,6 +141,13 @@ MICRO_EXAMPLE_DEF int micro_example_hello(void)
   return MICRO_EXAMPLE_OK;
 }
 
+#ifndef MICRO_ERROR_NO_ERROR_STR
+const char* micro_example_error_str[] =
+  {
+    [MICRO_EXAMPLE_OK] = "Ok",
+    [-_MICRO_EXAMPLE_ERROR_MAX] = "Invalid error"
+  };
+  
 MICRO_EXAMPLE_DEF const char* micro_example_get_error_str(int error)
 {
   if (error < _MICRO_EXAMPLE_ERROR_MAX)
@@ -156,6 +161,7 @@ MICRO_EXAMPLE_DEF const char* micro_example_get_error_str(int error)
 
   return micro_example_error_str[-error];
 }
+#endif
   
 MICRO_EXAMPLE_DEF int micro_example_major(void)
 {
