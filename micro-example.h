@@ -196,7 +196,7 @@ int main(void)
   return 0;
 }
   
-#endif // 0
+#endif // MICRO_EXAMPLE_MAIN
   
 #ifdef __cplusplus
 }
