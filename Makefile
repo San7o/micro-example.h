@@ -25,6 +25,9 @@ all: $(OUT_NAME)
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: $(OUT_NAME)
 
+release: CFLAGS += -DMICRO_EXAMPLE_COMMIT_HASH=$(shell git rev-parse --verify HEAD)
+release: $(OUT_NAME)
+
 run: $(OUT_NAME)
 	chmod +x $(OUT_NAME)
 	./$(OUT_NAME)

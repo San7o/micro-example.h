@@ -124,6 +124,10 @@ MICRO_EXAMPLE_DEF int micro_example_major(void);
 MICRO_EXAMPLE_DEF int micro_example_minor(void);
 MICRO_EXAMPLE_DEF int micro_example_version(void);
   
+#ifdef MICRO_EXAMPLE_COMMIT_HASH
+MICRO_EXAMPLE_DEF char* micro_example_commit_hash;
+#endif
+
 //
 // Implementation
 //
@@ -178,6 +182,12 @@ MICRO_EXAMPLE_DEF int micro_example_version(void)
   return MICRO_EXAMPLE_VERSION;
 }
 
+#ifdef MICRO_EXAMPLE_COMMIT_HASH
+#ifndef _MICRO_EXAMPLE_TO_STRING
+#define _MICRO_EXAMPLE_TO_STRING(x) #x
+#endif
+char* micro_example_commit_hash = _MICRO_EXAMPLE_TO_STRING(MICRO_EXAMPLE_COMMIT_HASH);
+#endif
   
 #endif // MICRO_EXAMPLE_IMPLEMENTATION
 
