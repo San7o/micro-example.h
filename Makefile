@@ -9,7 +9,6 @@
 CFLAGS        = -Wall -Werror -Wextra -Wpedantic -std=c99
 DEBUG_FLAGS   = -ggdb
 RELEASE_FLAGS = -DCOMMIT_HASH=$(shell git rev-parse --verify HEAD)
-
 LDFLAGS       =
 CC?           = gcc
 
