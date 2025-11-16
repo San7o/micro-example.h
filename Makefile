@@ -6,10 +6,12 @@
 #
 # Compiler flags
 #
-CFLAGS      = -Wall -Werror -Wextra -Wpedantic -std=c99
-DEBUG_FLAGS = -ggdb
-LDFLAGS     =
-CC?         = gcc
+CFLAGS        = -Wall -Werror -Wextra -Wpedantic -std=c99
+DEBUG_FLAGS   = -ggdb
+RELEASE_FLAGS = -DCOMMIT_HASH=$(shell git rev-parse --verify HEAD)
+
+LDFLAGS       =
+CC?           = gcc
 
 #
 # Project files
@@ -25,7 +27,7 @@ all: $(OUT_NAME)
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: $(OUT_NAME)
 
-release: CFLAGS += -DMICRO_EXAMPLE_COMMIT_HASH=$(shell git rev-parse --verify HEAD)
+release: CFLAGS += $(RELEASE_FLAGS)
 release: $(OUT_NAME)
 
 run: $(OUT_NAME)
