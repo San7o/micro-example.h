@@ -105,7 +105,7 @@ extern const char* micro_example_error_str[];
 // Types
 //
 
-typedef struct {
+typedef struct MicroExample {
   int foo;
   float bar;
 } MicroExample;
